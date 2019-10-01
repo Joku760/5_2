@@ -8,13 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var tekstiBoksi: UITextView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        tekstiBoksi.delegate = self
+        
+        let loadText = UserDefaults.standard.string(forKey: "savedText")
+        tekstiBoksi.text = loadText
+        
     }
 
+    func textViewDidChange(_ textField: UITextView){
+        let note = tekstiBoksi.text
+        UserDefaults.standard.set(note, forKey: "savedText")
+    }
 
 }
 
